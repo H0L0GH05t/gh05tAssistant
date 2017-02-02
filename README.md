@@ -1,2 +1,2 @@
 # gh05tAssistant
-Bot repo
+Repo for scripts used to share content across social media
