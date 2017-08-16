@@ -1,0 +1,18 @@
+*******************
+* INFO AND NOTES: *
+*******************
+
+To run, use the test.py for now. In the future, bot.py will be used instead once the working components are moved over.
+It will not post anything unless you confirm. Any images downloaded will be downloaded to "img" folder in the tripter root.
+The text that will be in the tweet will be written to the txt file in the "txt" folder in the tripter root.
+
+For overriding the gametag and time variables, put them in info.txt in the tripter root folder (example file included).
+The gametag will always be included when trimming the tweet text.
+
+*********
+* TODO: *
+*********
+
+- Remove some of the hacky fixes for the time, username, and trimming
+- Fix the problem with occasional duplicate tags after trimming (may be fixed?)
+
