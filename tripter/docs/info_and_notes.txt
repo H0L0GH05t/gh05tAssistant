@@ -15,4 +15,15 @@ The gametag will always be included when trimming the tweet text.
 
 - Remove some of the hacky fixes for the time, username, and trimming
 - Fix the problem with occasional duplicate tags after trimming (may be fixed?)
-
+- add countdown or "hours until" for tweet text (just cuz it'd be cool)
+- make hashtag lookup, creator for generator --> this will also help with sorting pulled hashtags from IG by popularity!
+- Add spell/grammar checker, twitter botting ettiqute rules
+- look into getting triggered by live notification --> possibly using Nightbot or another bot?
+- improve logic for image selection from instagram
+- create trim function for different social medias
+- look into a way for sort tags by popularity
+- create function to do corrections to tweet on rejection
+- add manual/edit text capability for tweet (read from same file) during approval cheack
+- add a way to manually include an image for tweet
+- create an update_status call for tweets without media
+- add rate limiter
