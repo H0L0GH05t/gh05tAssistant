@@ -1,0 +1,50 @@
+#################
+# Installation Guide: 
+# -------------------
+# 
+# When installing, please be aware if you're installing 32-bit or 64-bit libraries.
+# If you install 32-bit Python, install 32-bit libraries (same for 64-bit).
+#
+# Python 3.4.2 ( 64 bit )
+#       Install: python-3.4.2.amd64.msi  
+#   ***  Make sure you select "Install just for me".
+#       *  When running installer, check box to add python.exe to the PATH
+#       *  Add python.exe to Path (Select everything in Customize Python)
+#       Open up a command prompt, type python to make sure python 3.4.2 launched, all is well.
+#
+# PIP - Install/Upgrade PIP using easy install.
+# Note: Use the same command to update pip
+#       > easy_install -U pip
+#
+# PyWin32 
+#      http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/
+#      Install: pywin32-219.win-amd64-py3.4.exe
+#      NOTE: You may need to run a pywin32_postinstall.py script
+#      Python34\Scripts\pywin32_postinstall.py
+#
+#--------------------
+#
+# Q: How do requirements work?
+# A: Basically, you run this file through pip. So after following all of the steps above
+#    go to a command prompt and type the following command.
+#    #> pip install -b pipbuild -r {the name of this file}
+#   Note: Some libraries need the Visual studio environment configured before running pip with requirements.  See steps below.
+#   
+# =====================================================================================
+# UPDATE PYTHON LIBRARIES USING PIP
+# =====================================================================================
+#
+# > cd D:\sApps\Microsoft Visual Studio 10.0\VC
+# > vcvarsall
+# > cd %PROJECT_FOLDER%
+# > pip install -b pipbuild -r requirements.txt
+#
+#
+
+tweepy
+openpyxl
+#reportlab
+
+# Instagram API is custom so you can't install it from here...
+# I have the python3-instagram project on github as well which has
+# the correct files required for this to work
