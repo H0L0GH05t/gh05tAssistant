@@ -1,0 +1,1 @@
+python pdfcat.py -o edition.pdf "Schoeler_40 Seiten Eigenwerb001.pdf" "Schoeler_40 Seiten Eigenwerb002.pdf" "Schoeler_40 Seiten Eigenwerb003.pdf" "Schoeler_40 Seiten Eigenwerb004.pdf" "Schoeler_40 Seiten Eigenwerb005.pdf"

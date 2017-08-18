@@ -1,0 +1,6 @@
+pub_name=test pub
+encoding=ISO-8859-1
+xslt_path=class_list.xslt
+xml_folder_path=test
+output_path=tester_results.txt
+operation=list

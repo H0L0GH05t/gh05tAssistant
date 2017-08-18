@@ -1,0 +1,84 @@
+PyPDF2:
+- mergePage()
+- split pages
+- concatinate pages
+- get page sizes (no alt yet? - can use pdfminer?)
+
+pdftk:
+- background/multibackground	- merges page onto background page
+- stamp/multistamp		- stamps page over background page
+- burst				- splits pages into single pages
+- cat				- combines pages into one document
+- dump_data_annots		- dumps link annotations from a single page
+- dump_data			- dumps pdf file info
+
+
+- background < background PDF filename | - | PROMPT >
+	Applies a PDF watermark to the background of a single input PDF. Pass the background PDF’s filename after background 	like so:
+	pdftk in.pdf background back.pdf output out.pdf
+
+	Pdftk uses only the first page from the background PDF and applies it to every page 	of the input PDF. This page is scaled and rotated as needed to fit the input page. You can use - to pass a background 	PDF into pdftk via stdin.
+	If the input PDF does not have a transparent background (such as a PDF created from 	page scans) then the resulting background won’t be visible — use the stamp operation instead.
+
+- multibackground < multibackground PDF filename | - | PROMPT >
+	Same as the background operation, but applies each page of the background PDF to 		the corresponding page of the input PDF. If the input PDF has more pages than the 		stamp PDF, then the final stamp page is repeated across these remaining pages in 		the input PDF.
+
+- stamp < stamp PDF filename | - | PROMPT >
+	This behaves just like the background operation except it overlays the stamp PDF 		page on top of the input PDF document’s pages. This works best if the stamp PDF 		page has a transparent background.
+
+- multistamp < multistamp PDF filename | - | PROMPT >
+	Same as the stamp operation, but applies each page of the stamp PDF to the 		corresponding page of the input PDF. If the input PDF has more pages than the stamp 		PDF, then the final stamp page is repeated across these remaining pages in the 	input PDF.
+
+- cat [ < page ranges > ]
+	Assembles ("catenates") pages from input PDFs to create a new PDF. Use cat to merge PDF pages or to split PDF pages 	from documents. You can also use it to rotate PDF pages. Page order in the new PDF is specified by the order of the 	given page ranges. Page ranges are described like this:
+
+	[ < input PDF handle > ] [ < begin page number > [ -< end page number > [ < qualifier > ] ] ] [ < page rotation > ]
+
+	For example:
+
+	pdftk A=in1.pdf B=in2.pdf cat A1 B2-20even output out.pdf
+
+	The handle identifies one of the input PDF files, and the beginning and ending page numbers are one-based references to pages in the PDF file. The qualifier can be even or odd, and the page rotation can be north, south, east, west, left, right, or down.
+
+	If a PDF handle is given but no pages are specified, then the entire PDF is used. If no pages are specified for any of the input PDFs, then the input PDFs' bookmarks are also merged and included in the output.
+
+	If the handle is omitted from the page range, then the pages are taken from the first input PDF.
+
+	The even qualifier causes pdftk to use only the even-numbered PDF pages, so 1-6even yields pages 2, 4 and 6 in that order. 6-1even yields pages 6, 4 and 2 in that order.
+
+	The odd qualifier works similarly to the even.
+
+	The page rotation setting can cause pdftk to rotate pages and documents. Each option sets the page rotation as follows (in degrees): north: 0, east: 90, south: 180, west: 270, left: -90, right: +90, down: +180. left, right, and down make relative adjustments to a page’s rotation.
+
+	If no arguments are passed to cat, then pdftk merges all input PDFs in the order they were given to create the output.
+
+	NOTES:
+
+	< end page number > can be less than < begin page number >.
+	The keyword end can be used to reference the final page of a document instead of a page number.
+	Reference a single page by omitting the ending page number in the page range.
+The handle can be used alone to represent the entire PDF document, e.g., B1-end is the same as B.
+	You can reference page numbers in reverse order by prefixing them with the letter r. For example, page r1 is the last page of the document, r2 is the next-to-last page of the document, and rend is the first page of the document. You can use this prefix in ranges, too, for example r3-r1 is the last three pages of a PDF.
+	Page range examples without handles:
+
+	1-endeast - rotate entire document 90 degrees
+	5 11 20
+	5-25oddwest - take odd pages in range, rotate 90 degrees
+	6-1
+	Page Range Examples Using Handles:
+
+	Say A=in1.pdf B=in2.pdf, then:
+
+	A1-21 - take range from in1.pdf
+	Bend-1odd - take all odd pages from in2.pdf in reverse order
+	A72 - take a single page from in1.pdf
+	A1-21 Beven A72 - assemble pages from both in1.pdf and in2.pdf
+	Awest - rotate entire document 90 degrees
+	B - use all of in2.pdf
+	A2-30evenleft - take the even pages from the range, remove 90 degrees from each page’s rotation
+	A A - catenate in1.pdf with in1.pdf
+	Aevenwest Aoddeast - apply rotations to even pages, odd pages from in1.pdf
+	Awest Bwest Bdown - catenate rotated documents
+
+- dump_data_annots
+	This operation currently reports only link annotations. Reads a single input PDF file and reports annotation information to the given output filename or (if no output is given) to stdout. Non-ASCII characters are encoded as XML numerical entities. Does not create a new PDF.

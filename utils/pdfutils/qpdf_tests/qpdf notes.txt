@@ -1,0 +1,5 @@
+qpdf [ options ] infilename [ outfilename ]
+
+qpdf Weidwerk_05-2015_1.pdf --pages Weidwerk_05-2015_1.pdf 1 -- outfile1.pdf
+
+qpdf --qdf in.pdf out.pdf --> gets deflated pdf
