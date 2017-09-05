@@ -24,13 +24,12 @@ try:
 except Exception:
     print('reportlab not available')
 
-# pdf_path = "test_1.pdf"
-pdf_path = "Schoeler_40 Seiten Eigenwerb013.pdf"
-#pdf_path = "zen_merge_test.pdf"
+pdf_path = "test_1.pdf"
+#pdf_path = "merge_test.pdf"
 
-def auto_link_generator(pdf_path, debug_article_links, cropbox, trimbox):
+def url_finder(pdf_path, debug_article_links, cropbox, trimbox):
     if not pdfminer_available:
-        print('auto_link_generator failed: Pdfminer library not available')
+        print('url_finder failed: Pdfminer library not available')
         return
     try:
         # re patterns
@@ -247,7 +246,7 @@ if auto_generate_links:
                 mediabox = line.replace('MediaBox: ', '').split()
 
         link_page = None
-        link_page = auto_link_generator(pdf_path, debug_article_links, cropbox, trimbox)
+        link_page = url_finder(pdf_path, debug_article_links, cropbox, trimbox)
         if link_page != None:
             ## Apply the same mediabox to the link_page pdf, then crop to trimbox or cropbox
             # shutil.copy(link_page, "autolinks_results/link_page.pdf")####
@@ -362,7 +361,7 @@ if auto_generate_links:
             #     print(err)
             #######
     else:
-        print('auto_link_generator failed: Pdfminer library or Report Lab not available')
+        print('url_finder failed: Pdfminer library or Report Lab not available')
 
 #######################################################
 
